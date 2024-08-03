@@ -1,0 +1,4 @@
+controller:
+  replicaCount: 1
+  nodeSelector:
+    kubernetes.io/hostname:  # worker 노드 선택
