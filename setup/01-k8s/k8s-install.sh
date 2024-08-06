@@ -38,7 +38,7 @@ EOF
 sudo sysctl --system
 
 # 변경된 cgroup driver 확인
-sudo crtctl info | grep -i cgroup
+sudo crictl info | grep -i cgroup
 
 # 메모리 swap off
 sudo swapoff -a; sudo sed -i '/swap/d' /etc/fstab
