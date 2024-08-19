@@ -16,7 +16,7 @@ sudo apt-get install containerd -y
 # containerd 시스템에 등록
 systemctl enable containerd
 
-# IPv4 포워딩
+# 부팅 시 자동으로 모듈을 로드
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
@@ -28,6 +28,7 @@ sudo modprobe br_netfilter      # 브릿지 방화벽을 위한 모듈
 
 # 커널 파라미터 설정
 # 필요한 sysctl 파라미터를 설정하면, 재부팅 후에도 값이 유지된다.
+# IPv4 포워딩 
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-iptables  = 1
 net.bridge.bridge-nf-call-ip6tables = 1
