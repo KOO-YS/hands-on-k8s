@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-web
+  template:
+    metadata:
+      labels:
+        app: nginx-web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        # 화면 바꾸기 -> volume 직접 연결
+        - name: instance02-data
+          mountPath: /usr/share/nginx/html
+        # log 파일 보관 -> pvc를 생성해 pv와 연결
+        - name: logging-data
+          mountPath: /var/log/nginx
+      volumes:
+      # 워커 노드의 볼륨 -> volume 직접 연결
+      - name: instance02-data
+        hostPath:
+          path: /root/hands-on-k8s/web  # 해당 경로는 워커노드에 실제 위치해야 합니다
+          type: Directory
+      # log 파일 보관 -> pvc를 생성해 pv와 연결
+      - name: logging-data
+        persistentVolumeClaim:
+          claimName: nginx-pvc
