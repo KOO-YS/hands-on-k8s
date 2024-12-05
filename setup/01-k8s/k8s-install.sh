@@ -76,6 +76,6 @@ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt update
-sudo apt update kubeadm=1.27.16-1.1 kubelet=1.27.16-1.1 kubectl=1.27.16-1.1
+sudo apt install kubeadm=1.27.16-1.1 kubelet=1.27.16-1.1 kubectl=1.27.16-1.1
 # 패키지 자동 업데이트를 막고, 해당 버전을 고정
 sudo apt-mark hold kubelet kubeadm kubectl
